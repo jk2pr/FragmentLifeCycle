@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.jk.flcd.fragments.BlankFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -36,15 +37,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.replace_frag -> {
-
+                map.clear()
                 val fragment = BlankFragment()
                 bundle.putInt("ID", Color.GRAY)
                 fragment.arguments = bundle
+                count = 0
+                map[count++] = fragment
                 supportFragmentManager.beginTransaction().replace(R.id.content, fragment).commit()
 
+
             }
-
-
             R.id.hide_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = count - 1
@@ -56,6 +58,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 }
             }
+            R.id.clear ->
+                txt_log.text=""
+
 
         }
     }

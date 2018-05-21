@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/remove_top_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/add_frag"
@@ -34,7 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="12dp"
         android:text="@string/replace_top_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -47,7 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/hide_show_top_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -64,7 +61,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/replace_frag"
+        app:layout_constraintBottom_toBottomOf="@+id/clear"
         app:layout_constraintEnd_toStartOf="@+id/hide_frag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -105,4 +102,16 @@
             tools:text="Log \n Text \nfsasdfsafffsafsfdaffdsfsaf\nfsasads\nfsfafsa\m\n\nm\
 \n\n\n\n\n\n\n\n\n\n\\n\n\n" />
     </ScrollView>
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Clear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/add_frag"
+        app:layout_constraintTop_toBottomOf="@+id/replace_frag" />
 </android.support.constraint.ConstraintLayout>
