@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Frag LifeCycle</string>
+    <string name="add_fragment">add Fragment</string>
+    <string name="replace_top_fragment">replace Top Fragment</string>
+    <string name="remove_top_fragment">remove Top Fragment</string>
+    <string name="hide_show_top_fragment">Top Fragment hide/show</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_fragment">No Fragment</string>
+</resources>
