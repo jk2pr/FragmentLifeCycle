@@ -22,11 +22,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.add_frag -> {
                 val fragment = BlankFragment()
+                map[count++] = fragment
                 val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
                 bundle.putInt("ID", color)
+                bundle.putInt("count", count)
                 fragment.arguments = bundle
-                map[count++] = fragment
                 supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).commit()
+
             }
             R.id.remove_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
@@ -39,10 +41,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.replace_frag -> {
                 map.clear()
                 val fragment = BlankFragment()
-                bundle.putInt("ID", Color.GRAY)
-                fragment.arguments = bundle
-                count = 0
                 map[count++] = fragment
+                bundle.putInt("ID", Color.GRAY)
+                bundle.putInt("count", count)
+                fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.content, fragment).commit()
 
 
@@ -58,8 +60,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 }
             }
-            R.id.clear ->
-                txt_log.text=""
+            R.id.clear -> {
+                txt_log.text = ""
+                log.delete(0, log.length)
+            }
 
 
         }
@@ -87,6 +91,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         remove_frag.setOnClickListener(this)
         replace_frag.setOnClickListener(this)
         hide_frag.setOnClickListener(this)
+        clear.setOnClickListener(this)
 
     }
 
