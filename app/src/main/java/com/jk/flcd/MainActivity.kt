@@ -1,22 +1,21 @@
 package com.jk.flcd
 
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.jk.flcd.fragments.BlankFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    val log: StringBuffer = StringBuffer()
+    private val log: StringBuffer = StringBuffer()
     private val TAG0: String = "Activity : "
     private val TAG1: String = "Fragment : "
-    val rnd = Random()
+    private val rnd = Random()
     private val map: MutableMap<Int, BlankFragment> = mutableMapOf()
-    var count = 0
+    private var count = 0
     override fun onClick(v: View) {
         val bundle = Bundle()
         when (v.id) {

@@ -41,7 +41,10 @@ class BlankFragment : Fragment() {
         holdingActivity.displayFragmentLog(count.toString() + " onViewCreated")
         val id = arguments?.getInt("ID")
         fragment?.setBackgroundColor(id!!)
-        blank_text.text = count.toString() + "Fragment"
+
+
+
+        blank_text.text = String.format(resources.getString(R.string.count), count)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
