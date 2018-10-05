@@ -26,14 +26,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).commit()
+                supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).addToBackStack(fragment.toString()).commit()
 
             }
             R.id.remove_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = --count
                     val fragmentToRemove = map[ide]
-                    supportFragmentManager.beginTransaction().remove(fragmentToRemove).commit()
+                    supportFragmentManager.beginTransaction().remove(fragmentToRemove).addToBackStack(fragmentToRemove.toString()).commit()
                     map.remove(ide)
                 }
             }
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", Color.GRAY)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                supportFragmentManager.beginTransaction().replace(R.id.content, fragment).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.content, fragment).addToBackStack(fragment.toString()).commit()
 
 
             }
@@ -53,9 +53,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     val ide = count - 1
                     val fragmentToHide = map[ide]
                     if (fragmentToHide!!.isHidden)
-                        supportFragmentManager.beginTransaction().show(fragmentToHide).commit()
+                        supportFragmentManager.beginTransaction().show(fragmentToHide).addToBackStack(fragmentToHide.toString()).commit()
                     else
-                        supportFragmentManager.beginTransaction().hide(fragmentToHide).commit()
+                        supportFragmentManager.beginTransaction().hide(fragmentToHide).addToBackStack(fragmentToHide.toString()).commit()
 
                 }
             }
