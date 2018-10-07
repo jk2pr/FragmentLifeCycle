@@ -2,8 +2,13 @@ package com.jk.flcd
 
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.TextView
 import com.jk.flcd.fragments.BlankFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -11,13 +16,18 @@ import java.util.*
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private val log: StringBuffer = StringBuffer()
-    private val TAG0: String = "Activity : "
-    private val TAG1: String = "Fragment : "
     private val rnd = Random()
     private val map: MutableMap<Int, BlankFragment> = mutableMapOf()
     private var count = 0
+
+    companion object {
+        private const val TAG0: String = "Activity : "
+        private const val TAG1: String = "Fragment : "
+    }
+
     override fun onClick(v: View) {
         val bundle = Bundle()
+        var commitId = -1
         when (v.id) {
             R.id.add_frag -> {
                 val fragment = BlankFragment()
@@ -26,25 +36,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).addToBackStack(fragment.toString()).commit()
+                commitId = supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).addToBackStack(fragment.toString()).commit()
 
             }
             R.id.remove_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = --count
                     val fragmentToRemove = map[ide]
-                    supportFragmentManager.beginTransaction().remove(fragmentToRemove).addToBackStack(fragmentToRemove.toString()).commit()
+                    commitId = supportFragmentManager.beginTransaction().remove(fragmentToRemove)
+                            //.addToBackStack(fragmentToRemove.toString())
+                            .commit()
                     map.remove(ide)
+                    if (map.isEmpty())
+                        count = 0
                 }
             }
             R.id.replace_frag -> {
                 map.clear()
                 val fragment = BlankFragment()
                 map[count++] = fragment
-                bundle.putInt("ID", Color.GRAY)
+                val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+                bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                supportFragmentManager.beginTransaction().replace(R.id.content, fragment).addToBackStack(fragment.toString()).commit()
+                commitId = supportFragmentManager.beginTransaction().replace(R.id.content, fragment)
+                        //.addToBackStack(fragment.toString())
+                .commit()
 
 
             }
@@ -53,9 +70,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     val ide = count - 1
                     val fragmentToHide = map[ide]
                     if (fragmentToHide!!.isHidden)
-                        supportFragmentManager.beginTransaction().show(fragmentToHide).addToBackStack(fragmentToHide.toString()).commit()
+                        commitId = supportFragmentManager.beginTransaction().show(fragmentToHide)
+                                //addToBackStack(fragmentToHide.toString())
+                                .commit()
                     else
-                        supportFragmentManager.beginTransaction().hide(fragmentToHide).addToBackStack(fragmentToHide.toString()).commit()
+                        commitId = supportFragmentManager.beginTransaction().hide(fragmentToHide)
+                                //.addToBackStack(fragmentToHide.toString())
+                                .commit()
 
                 }
             }
@@ -64,8 +85,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 log.delete(0, log.length)
             }
 
-
         }
+        Log.d(javaClass.simpleName, (v as Button).text.toString())
+        Log.d(javaClass.simpleName + "commitId= ", commitId.toString())
+        Log.d(javaClass.simpleName + " BackStackCount is ", supportFragmentManager.backStackEntryCount.toString())
+        supportFragmentManager.fragments.forEach {
+            Log.d(javaClass.simpleName + " Fragments in Stack is ", (it as BlankFragment).count.toString())
+        }
+
     }
 
     private fun displayActivityLog(text: String) {
@@ -118,4 +145,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onDestroy()
         displayActivityLog("onDestroy")
     }
+
+
 }

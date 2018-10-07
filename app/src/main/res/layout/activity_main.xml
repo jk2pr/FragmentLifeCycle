@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
 
@@ -11,17 +12,22 @@
         android:id="@+id/add_frag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/add_button_selector"
         android:text="@string/add_fragment"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/remove_frag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/remove_button_selector"
         android:text="@string/remove_top_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/add_frag"
@@ -31,8 +37,10 @@
         android:id="@+id/replace_frag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/replace_button_selector"
         android:text="@string/replace_top_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -43,11 +51,13 @@
         android:id="@+id/hide_frag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="@string/hide_show_top_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
+        android:background="@drawable/hide_show_button_selector"
         app:layout_constraintStart_toStartOf="@+id/add_frag"
         app:layout_constraintTop_toBottomOf="@+id/remove_frag" />
 
@@ -56,11 +66,13 @@
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/clear"
         app:layout_constraintEnd_toStartOf="@+id/hide_frag"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,17 +111,19 @@
             android:textSize="12sp"
 
 
-            tools:text="Log \n Text \nfsasdfsafffsafsfdaffdsfsaf\nfsasads\nfsfafsa\m\n\nm\
-\n\n\n\n\n\n\n\n\n\n\\n\n\n" />
+            tools:text="Your log will apear \n here \n" />
     </ScrollView>
 
     <Button
         android:id="@+id/clear"
         android:layout_width="0dp"
+        android:textColor="@color/textcolor_dark_selector"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Clear"
+        android:text="@string/clear"
+        android:background="@drawable/clear_button_selector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/add_frag"

@@ -10,13 +10,14 @@ import android.view.ViewGroup
 import com.jk.flcd.MainActivity
 
 import com.jk.flcd.R
+import com.jk.flcd.utils.ViewUtils
 import kotlinx.android.synthetic.main.fragment_blank.*
 
 
 class BlankFragment : Fragment() {
 
     private val holdingActivity: MainActivity by lazy { activity as MainActivity }
-    private val count: Int by lazy { arguments!!.getInt("count") }
+     val count: Int by lazy { arguments!!.getInt("count") }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -43,8 +44,11 @@ class BlankFragment : Fragment() {
         fragment?.setBackgroundColor(id!!)
 
 
+        blank_text.apply {
 
-        blank_text.text = String.format(resources.getString(R.string.count), count)
+            setTextColor(ViewUtils.getLabelTextColor(holdingActivity, id!!))
+            text = String.format(resources.getString(R.string.count), count)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
