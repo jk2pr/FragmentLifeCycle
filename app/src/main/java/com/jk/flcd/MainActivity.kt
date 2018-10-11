@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                commitId = supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).addToBackStack(fragment.toString()).commit()
+                commitId = supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).commit()
 
             }
             R.id.remove_frag -> {
