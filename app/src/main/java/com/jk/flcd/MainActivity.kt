@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.SpannableString
 import android.util.Log
 import android.view.View
 import android.view.Window
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         val bundle = Bundle()
-        var commitId = -1
+
         when (v.id) {
             R.id.add_frag -> {
                 val fragment = BlankFragment()
@@ -36,14 +37,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                commitId = supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).commit()
+                supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).commit()
 
             }
             R.id.remove_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = --count
                     val fragmentToRemove = map[ide]
-                    commitId = supportFragmentManager.beginTransaction().remove(fragmentToRemove)
+                    supportFragmentManager.beginTransaction().remove(fragmentToRemove)
                             //.addToBackStack(fragmentToRemove.toString())
                             .commit()
                     map.remove(ide)
@@ -59,9 +60,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                commitId = supportFragmentManager.beginTransaction().replace(R.id.content, fragment)
+                supportFragmentManager.beginTransaction().replace(R.id.content, fragment)
                         //.addToBackStack(fragment.toString())
-                .commit()
+                        .commit()
 
 
             }
@@ -70,11 +71,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     val ide = count - 1
                     val fragmentToHide = map[ide]
                     if (fragmentToHide!!.isHidden)
-                        commitId = supportFragmentManager.beginTransaction().show(fragmentToHide)
+                        supportFragmentManager.beginTransaction().show(fragmentToHide)
                                 //addToBackStack(fragmentToHide.toString())
                                 .commit()
                     else
-                        commitId = supportFragmentManager.beginTransaction().hide(fragmentToHide)
+                        supportFragmentManager.beginTransaction().hide(fragmentToHide)
                                 //.addToBackStack(fragmentToHide.toString())
                                 .commit()
 
@@ -86,26 +87,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
 
         }
-        Log.d(javaClass.simpleName, (v as Button).text.toString())
-        Log.d(javaClass.simpleName + "commitId= ", commitId.toString())
-        Log.d(javaClass.simpleName + " BackStackCount is ", supportFragmentManager.backStackEntryCount.toString())
-        supportFragmentManager.fragments.forEach {
-            Log.d(javaClass.simpleName + " Fragments in Stack is ", (it as BlankFragment).count.toString())
-        }
+        /* Log.d(javaClass.simpleName, (v as Button).text.toString())
+         Log.d(javaClass.simpleName + "commitId= ", commitId.toString())
+         Log.d(javaClass.simpleName + " BackStackCount is ", supportFragmentManager.backStackEntryCount.toString())
+         supportFragmentManager.fragments.forEach {
+             Log.d(javaClass.simpleName + " Fragments in Stack is ", (it as BlankFragment).count.toString())
+         }*/
 
     }
 
     private fun displayActivityLog(text: String) {
         log.append("\n").append(TAG0).append(text)
         txt_log.text = log
-        scrollView.scrollTo(0, scrollView.bottom)
+        scrollView.post {
+            scrollView.fullScroll(View.FOCUS_DOWN)
+        }
 
     }
 
     fun displayFragmentLog(text: String) {
+
         log.append("\n").append(TAG1).append(text)
         txt_log.text = log
-        scrollView.scrollTo(0, scrollView.bottom)
+        scrollView.post {
+            scrollView.fullScroll(View.FOCUS_DOWN)
+        }
+
 
     }
 
