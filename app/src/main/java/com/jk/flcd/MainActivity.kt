@@ -98,9 +98,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun displayActivityLog(text: String) {
         log.append("\n").append(TAG0).append(text)
-        txt_log.text = log
-        scrollView.post {
-            scrollView.fullScroll(View.FOCUS_DOWN)
+        txt_log?.text = log
+        scrollView?.post {
+            scrollView?.fullScroll(View.FOCUS_DOWN)
         }
 
     }
@@ -108,9 +108,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun displayFragmentLog(text: String) {
 
         log.append("\n").append(TAG1).append(text)
-        txt_log.text = log
-        scrollView.post {
-            scrollView.fullScroll(View.FOCUS_DOWN)
+        txt_log?.text = log
+        scrollView?.post {
+            scrollView?.fullScroll(View.FOCUS_DOWN)
         }
 
 
@@ -146,6 +146,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onStop() {
         super.onStop()
         displayActivityLog("onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        displayActivityLog("onRestart")
     }
 
     override fun onDestroy() {
