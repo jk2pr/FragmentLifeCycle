@@ -2,29 +2,25 @@ package com.jk.flcd
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.text.SpannableString
 import android.util.Log
 import android.view.View
-import android.view.Window
 import android.widget.Button
-import android.widget.TextView
 import com.jk.flcd.fragments.BlankFragment
+import com.jk.flcd.utils.Constant.TAG0
+import com.jk.flcd.utils.Constant.TAG1
+import com.jk.flcd.utils.Constant.log
+import com.jk.flcd.utils.Constant.rnd
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val log: StringBuffer = StringBuffer()
-    private val rnd = Random()
+
     private val map: MutableMap<Int, BlankFragment> = mutableMapOf()
     private var count = 0
 
-    companion object {
-        private const val TAG0: String = "Activity : "
-        private const val TAG1: String = "Fragment : "
-    }
 
     override fun onClick(v: View) {
         val bundle = Bundle()
@@ -130,27 +126,44 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onStart() {
         super.onStart()
-        displayActivityLog("onStart")
+        displayActivityLog("OnStart")
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        displayActivityLog("OnRestart")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle? ) {
+        super.onSaveInstanceState(outState)
+        displayActivityLog("OnSaveInstanceState")
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        displayActivityLog("OnRestoreInstanceState")
+    }
+
+
 
     override fun onResume() {
         super.onResume()
-        displayActivityLog("onResume")
+        displayActivityLog("OnResume")
     }
 
     override fun onPause() {
         super.onPause()
-        displayActivityLog("onPause")
+        displayActivityLog("OnPause")
     }
 
     override fun onStop() {
         super.onStop()
-        displayActivityLog("onStop")
+        displayActivityLog("OnStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        displayActivityLog("onDestroy")
+        displayActivityLog("OnDestroy")
     }
 
 
