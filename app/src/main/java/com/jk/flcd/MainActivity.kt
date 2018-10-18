@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
-import android.text.SpannableString
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         val bundle = Bundle()
-
+        var commitId = -1
         when (v.id) {
             R.id.add_frag -> {
                 val fragment = BlankFragment()
@@ -33,14 +32,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).commit()
+                commitId = supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).commit()
 
             }
             R.id.remove_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = --count
                     val fragmentToRemove = map[ide]
-                    supportFragmentManager.beginTransaction().remove(fragmentToRemove)
+                    commitId = supportFragmentManager.beginTransaction().remove(fragmentToRemove)
                             //.addToBackStack(fragmentToRemove.toString())
                             .commit()
                     map.remove(ide)
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                supportFragmentManager.beginTransaction().replace(R.id.content, fragment)
+                commitId = supportFragmentManager.beginTransaction().replace(R.id.content, fragment)
                         //.addToBackStack(fragment.toString())
                         .commit()
 
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = count - 1
                     val fragmentToHide = map[ide]
-                    if (fragmentToHide!!.isHidden)
+                    commitId = if (fragmentToHide!!.isHidden)
                         supportFragmentManager.beginTransaction().show(fragmentToHide)
                                 //addToBackStack(fragmentToHide.toString())
                                 .commit()
@@ -83,32 +82,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
 
         }
-        /* Log.d(javaClass.simpleName, (v as Button).text.toString())
-         Log.d(javaClass.simpleName + "commitId= ", commitId.toString())
-         Log.d(javaClass.simpleName + " BackStackCount is ", supportFragmentManager.backStackEntryCount.toString())
-         supportFragmentManager.fragments.forEach {
-             Log.d(javaClass.simpleName + " Fragments in Stack is ", (it as BlankFragment).count.toString())
-         }*/
+        Log.d(javaClass.simpleName, (v as Button).text.toString())
+        Log.d(javaClass.simpleName + "commitId= ", commitId.toString())
+        Log.d(javaClass.simpleName + " BackStackCount is ", supportFragmentManager.backStackEntryCount.toString())
+        supportFragmentManager.fragments.forEach {
+            Log.d(javaClass.simpleName + " Fragments in Stack is ", (it as BlankFragment).count.toString())
+        }
 
     }
 
     private fun displayActivityLog(text: String) {
         log.append("\n").append(TAG0).append(text)
-        txt_log.text = log
-        scrollView.post {
-            scrollView.fullScroll(View.FOCUS_DOWN)
-        }
+        txt_log?.text = log
 
     }
 
     fun displayFragmentLog(text: String) {
-
         log.append("\n").append(TAG1).append(text)
-        txt_log.text = log
-        scrollView.post {
-            scrollView.fullScroll(View.FOCUS_DOWN)
-        }
-
+        txt_log?.text = log
+        //scrollView?.scrollTo(0, scrollView.bottom)
 
     }
 
