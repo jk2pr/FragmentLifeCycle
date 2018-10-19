@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context=".MainActivity">
 
 
-    <Button
-        android:id="@+id/add_frag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/add_button_selector"
-        android:text="@string/add_fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+
+        tools:context=".MainActivity">
+
+
+        <Button
+            android:id="@+id/add_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/add_button_selector"
+            android:text="@string/add_fragment"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/remove_frag"
@@ -29,6 +36,7 @@
         android:layout_marginRight="8dp"
         android:background="@drawable/remove_button_selector"
         android:text="@string/remove_top_fragment"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/add_frag"
         app:layout_constraintTop_toBottomOf="@+id/add_frag" />
@@ -42,6 +50,7 @@
         android:layout_marginRight="8dp"
         android:background="@drawable/replace_button_selector"
         android:text="@string/replace_top_fragment"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/remove_frag"
@@ -54,13 +63,29 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/hide_show_button_selector"
         android:text="@string/hide_show_top_fragment"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        android:background="@drawable/hide_show_button_selector"
         app:layout_constraintStart_toStartOf="@+id/add_frag"
         app:layout_constraintTop_toBottomOf="@+id/remove_frag" />
 
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/clear_button_selector"
+        android:text="@string/clear"
+        android:textAllCaps="false"
+        android:textColor="@color/textcolor_dark_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/add_frag"
+        app:layout_constraintTop_toBottomOf="@+id/replace_frag" />
 
     <FrameLayout
         android:id="@+id/content"
@@ -73,8 +98,8 @@
         android:layout_marginRight="8dp"
         android:background="@color/colorPrimaryDark"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/clear"
         app:layout_constraintEnd_toStartOf="@+id/hide_frag"
+        app:layout_constraintHeight_percent=".5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -86,45 +111,27 @@
 
     </FrameLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView"
+
+    <TextView
+        android:id="@+id/txt_log"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/colorTeal"
+        android:textColor="@color/colorPrimaryDark"
+        android:scrollbars="vertical|horizontal"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:padding="8dp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content">
+        app:layout_constraintTop_toBottomOf="@+id/content"
+        tools:text="Your log will apear \n here \n" />
 
 
-        <TextView
-            android:id="@+id/txt_log"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textSize="12sp"
-
-
-            tools:text="Your log will apear \n here \n" />
-    </ScrollView>
-
-    <Button
-        android:id="@+id/clear"
-        android:layout_width="0dp"
-        android:textColor="@color/textcolor_dark_selector"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/clear"
-        android:background="@drawable/clear_button_selector"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/add_frag"
-        app:layout_constraintTop_toBottomOf="@+id/replace_frag" />
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
