@@ -2,6 +2,7 @@ package com.jk.flcd
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Process
 import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
@@ -107,7 +108,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        txt_log.movementMethod=ScrollingMovementMethod()
+        txt_log.movementMethod = ScrollingMovementMethod()
         displayActivityLog("OnCreate")
         add_frag.setOnClickListener(this)
         remove_frag.setOnClickListener(this)
@@ -127,7 +128,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         displayActivityLog("OnRestart")
     }
 
-    override fun onSaveInstanceState(outState: Bundle? ) {
+    override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         displayActivityLog("OnSaveInstanceState")
     }
@@ -136,7 +137,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onRestoreInstanceState(savedInstanceState)
         displayActivityLog("OnRestoreInstanceState")
     }
-
 
 
     override fun onResume() {
@@ -161,9 +161,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        displayActivityLog("OnBackPressed")
-        log.delete(0, log.length)
-        log.setLength(0)
+        txt_log.postDelayed({
+            android.os.Process.killProcess(Process.myPid());
+            System.exit(1);
+        }, 200)
+
     }
 
 

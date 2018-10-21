@@ -8,7 +8,7 @@ import com.jk.flcd.R
 object ViewUtils {
     fun getLabelTextColor(context: Context, bgColorValue: Int): Int {
         return if (isLightColor(bgColorValue)) {
-            ContextCompat.getColor(context, R.color.colorPrimary)
+            ContextCompat.getColor(context, android.R.color.black)
         } else {
             ContextCompat.getColor(context, android.R.color.white)
         }
