@@ -11,15 +11,16 @@ import android.widget.Button
 import com.jk.flcd.fragments.BlankFragment
 import com.jk.flcd.utils.Constant.TAG0
 import com.jk.flcd.utils.Constant.TAG1
+import com.jk.flcd.utils.Constant.count
 import com.jk.flcd.utils.Constant.log
+import com.jk.flcd.utils.Constant.map
 import com.jk.flcd.utils.Constant.rnd
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
-    private val map: MutableMap<Int, BlankFragment> = mutableMapOf()
-    private var count = 0
+
 
 
     override fun onClick(v: View) {
@@ -40,10 +41,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = --count
                     val fragmentToRemove = map[ide]
-                    commitId = supportFragmentManager.beginTransaction().remove(fragmentToRemove)
-                            //.addToBackStack(fragmentToRemove.toString())
-                            .commit()
-                    map.remove(ide)
+                    fragmentToRemove?.let {
+                        commitId = supportFragmentManager.beginTransaction().remove(fragmentToRemove)
+                                //.addToBackStack(fragmentToRemove.toString())
+                                .commit()
+                        map.remove(ide)
+
+                    }
                     if (map.isEmpty())
                         count = 0
                 }
