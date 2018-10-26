@@ -20,27 +20,26 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
-
-
-
     override fun onClick(v: View) {
         val bundle = Bundle()
         var commitId = -1
         when (v.id) {
             R.id.add_frag -> {
                 val fragment = BlankFragment()
-                map[count++] = fragment
+                val tag = fragment.toString()
+                map[count++] = tag
                 val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                commitId = supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment.toString()).commit()
+                commitId = supportFragmentManager.beginTransaction().add(R.id.content, fragment, tag).commit()
 
             }
             R.id.remove_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = --count
-                    val fragmentToRemove = map[ide]
+                    val tagFragmentToRemove = map[ide]
+                    val fragmentToRemove = supportFragmentManager.findFragmentByTag(tagFragmentToRemove)
                     fragmentToRemove?.let {
                         commitId = supportFragmentManager.beginTransaction().remove(fragmentToRemove)
                                 //.addToBackStack(fragmentToRemove.toString())
@@ -55,12 +54,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.replace_frag -> {
                 map.clear()
                 val fragment = BlankFragment()
-                map[count++] = fragment
+                val tag = fragment.toString()
+                map[count++] = tag
                 val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                commitId = supportFragmentManager.beginTransaction().replace(R.id.content, fragment)
+                commitId = supportFragmentManager.beginTransaction().replace(R.id.content, fragment, tag)
                         //.addToBackStack(fragment.toString())
                         .commit()
 
@@ -69,16 +69,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.hide_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = count - 1
-                    val fragmentToHide = map[ide]
-                    commitId = if (fragmentToHide!!.isHidden)
-                        supportFragmentManager.beginTransaction().show(fragmentToHide)
-                                //addToBackStack(fragmentToHide.toString())
-                                .commit()
-                    else
-                        supportFragmentManager.beginTransaction().hide(fragmentToHide)
-                                //.addToBackStack(fragmentToHide.toString())
-                                .commit()
+                    val tagFragmentToHide = map[ide]
+                    val fragmentToHide = supportFragmentManager.findFragmentByTag(tagFragmentToHide)
+                    fragmentToHide?.let {
+                        commitId = if (fragmentToHide.isHidden)
+                            supportFragmentManager.beginTransaction().show(fragmentToHide)
+                                    //addToBackStack(fragmentToHide.toString())
+                                    .commit()
+                        else
+                            supportFragmentManager.beginTransaction().hide(fragmentToHide)
+                                    //.addToBackStack(fragmentToHide.toString())
+                                    .commit()
 
+                    }
                 }
             }
             R.id.clear -> {
