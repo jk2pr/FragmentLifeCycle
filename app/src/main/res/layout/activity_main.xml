@@ -130,7 +130,7 @@
         android:layout_marginBottom="8dp"
         android:padding="8dp"
         android:scrollbars="vertical|horizontal"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -16,6 +16,7 @@ import com.jk.flcd.utils.Constant.log
 import com.jk.flcd.utils.Constant.map
 import com.jk.flcd.utils.Constant.rnd
 import kotlinx.android.synthetic.main.activity_main.*
+import com.jk.flcd.R
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
