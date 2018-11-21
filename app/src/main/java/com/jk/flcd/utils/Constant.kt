@@ -9,3 +9,4 @@ object Constant {
      const val TAG0: String = "Activity : "
      const val TAG1: String = "Fragment : "
 }
+//Test 0
