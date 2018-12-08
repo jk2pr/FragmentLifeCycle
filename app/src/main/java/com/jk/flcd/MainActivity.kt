@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun displayFragmentLog(text: String) {
         log.append("\n").append(TAG1).append(text)
         txt_log?.text = log.trim()
-        //scrollView?.scrollTo(0, scrollView.bottom)
+        //txt_log?.scrollTo(0, txt_log.bottom)
 
     }
 
