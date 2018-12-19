@@ -1,4 +1,4 @@
-package com.jk.flcd.fragments
+package com.jk.flcd.ui.fragments
 
 
 import android.content.Context
@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jk.flcd.MainActivity
+import com.jk.flcd.ui.main.main.MainActivity
 
 import com.jk.flcd.R
 import com.jk.flcd.utils.ViewUtils

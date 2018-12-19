@@ -9,7 +9,7 @@
     android:background="@color/lightgreen"
 
 
-    tools:context=".MainActivity">
+    tools:context=".ui.main.main.MainActivity">
 
 
     <android.support.v7.widget.AppCompatButton
