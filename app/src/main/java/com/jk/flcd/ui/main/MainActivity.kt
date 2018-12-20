@@ -1,5 +1,4 @@
-package com.jk.flcd.ui.main.main
-
+package com.jk.flcd.ui.main
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Process
@@ -170,8 +169,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onBackPressed() {
         super.onBackPressed()
         txt_log.postDelayed({
-            android.os.Process.killProcess(Process.myPid());
-            System.exit(1);
+            android.os.Process.killProcess(Process.myPid())
+            System.exit(1)
         }, 200)
 
     }
