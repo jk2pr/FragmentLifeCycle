@@ -3,7 +3,7 @@ package com.jk.flcd.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import com.jk.flcd.utils.ViewUtils
 import kotlinx.android.synthetic.main.fragment_blank.*
 
 
-class BlankFragment : Fragment() {
+class BlankFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var holdingActivity: MainActivity
     val count: Int by lazy { arguments!!.getInt("count") }

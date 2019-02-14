@@ -2,7 +2,7 @@ package com.jk.flcd.ui.main
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Process
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
