@@ -6,134 +6,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightgreen"
+    android:background="@color/colorPrimaryLight"
 
 
     tools:context=".ui.main.MainActivity">
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/add_frag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/add_fragment"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/remove_frag"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/remove_frag"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/remove_top_fragment"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/hide_frag"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/add_frag"
-        app:layout_constraintTop_toBottomOf="@+id/add_frag" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/replace_frag"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/replace_top_fragment"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/clear"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/remove_frag"
-        app:layout_constraintTop_toBottomOf="@+id/hide_frag" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/hide_frag"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/hide_show_top_fragment"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/replace_frag"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/add_frag"
-        app:layout_constraintTop_toBottomOf="@+id/remove_frag" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/clear"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/clear"
-        android:textAllCaps="false"
-        android:textColor="@color/textcolor_dark_selector"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/add_frag"
-        app:layout_constraintTop_toBottomOf="@+id/replace_frag" />
-
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_red_button"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".5">
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@android:color/black"
             android:text="@string/no_fragment" />
 
     </FrameLayout>
-
+    <ScrollView
+        android:id="@+id/scrollView"
+        app:layout_constraintWidth_percent="0.25"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fillViewport="true"
+        android:background="@drawable/rounded_red_button"
+      >
 
     <TextView
         android:id="@+id/txt_log"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:padding="8dp"
-        android:scrollbars="vertical|horizontal"
-        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/hide_frag"
-        app:layout_constraintStart_toEndOf="@+id/content"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Your log will apear \n here \n" />
+
+        tools:text="Your log will appear \n here \n" />
+    </ScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintWidth_percent="0.25"
+        android:background="@drawable/rounded_red_button"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_frag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/add_fragment"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/remove_frag"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/remove_frag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/remove_top_fragment"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/hide_frag"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_frag" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/hide_frag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/hide_show_top_fragment"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/replace_frag"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/remove_frag" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/replace_frag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/replace_top_fragment"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/clear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hide_frag" />
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/clear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/clear"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/replace_frag" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

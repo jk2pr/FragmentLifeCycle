@@ -1,12 +1,14 @@
 package com.jk.flcd.ui.main
+
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Process
-import androidx.appcompat.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import com.jk.flcd.R
 import com.jk.flcd.ui.fragments.BlankFragment
 import com.jk.flcd.utils.Constant.TAG0
 import com.jk.flcd.utils.Constant.TAG1
@@ -15,7 +17,7 @@ import com.jk.flcd.utils.Constant.log
 import com.jk.flcd.utils.Constant.map
 import com.jk.flcd.utils.Constant.rnd
 import kotlinx.android.synthetic.main.activity_main.*
-import com.jk.flcd.R
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -32,16 +34,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                commitId = supportFragmentManager.beginTransaction().add(R.id.content, fragment, tag).commit()
+                commitId =
+                    supportFragmentManager.beginTransaction().add(R.id.content, fragment, tag)
+                        .commit()
 
             }
             R.id.remove_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
                     val ide = --count
                     val tagFragmentToRemove = map[ide]
-                    val fragmentToRemove = supportFragmentManager.findFragmentByTag(tagFragmentToRemove)
+                    val fragmentToRemove =
+                        supportFragmentManager.findFragmentByTag(tagFragmentToRemove)
                     fragmentToRemove?.let {
-                        commitId = supportFragmentManager.beginTransaction().remove(fragmentToRemove)
+                        commitId =
+                            supportFragmentManager.beginTransaction().remove(fragmentToRemove)
                                 //.addToBackStack(fragmentToRemove.toString())
                                 .commit()
                         map.remove(ide)
@@ -60,7 +66,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putInt("ID", color)
                 bundle.putInt("count", count)
                 fragment.arguments = bundle
-                commitId = supportFragmentManager.beginTransaction().replace(R.id.content, fragment, tag)
+                commitId =
+                    supportFragmentManager.beginTransaction().replace(R.id.content, fragment, tag)
                         //.addToBackStack(fragment.toString())
                         .commit()
 
@@ -74,12 +81,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     fragmentToHide?.let {
                         commitId = if (fragmentToHide.isHidden)
                             supportFragmentManager.beginTransaction().show(fragmentToHide)
-                                    //addToBackStack(fragmentToHide.toString())
-                                    .commit()
+                                //addToBackStack(fragmentToHide.toString())
+                                .commit()
                         else
                             supportFragmentManager.beginTransaction().hide(fragmentToHide)
-                                    //.addToBackStack(fragmentToHide.toString())
-                                    .commit()
+                                //.addToBackStack(fragmentToHide.toString())
+                                .commit()
 
                     }
                 }
@@ -92,9 +99,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         Log.d(javaClass.simpleName, (v as Button).text.toString())
         Log.d(javaClass.simpleName + "commitId= ", commitId.toString())
-        Log.d(javaClass.simpleName + " BackStackCount is ", supportFragmentManager.backStackEntryCount.toString())
+        Log.d(
+            javaClass.simpleName + " BackStackCount is ",
+            supportFragmentManager.backStackEntryCount.toString()
+        )
         supportFragmentManager.fragments.forEach {
-            Log.d(javaClass.simpleName + " Fragments in Stack is ", (it as BlankFragment).count.toString())
+            Log.d(
+                javaClass.simpleName + " Fragments in Stack is ",
+                (it as BlankFragment).count.toString()
+            )
         }
 
     }
@@ -102,12 +115,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun displayActivityLog(text: String) {
         log.append("\n").append(TAG0).append(text)
         txt_log?.text = log.trim()
+        scrollView?.post {
+            scrollView.fullScroll(View.FOCUS_DOWN)
+        }
 
     }
 
     fun displayFragmentLog(text: String) {
         log.append("\n").append(TAG1).append(text)
         txt_log?.text = log.trim()
+        scrollView?.post {
+            scrollView.fullScroll(View.FOCUS_DOWN)
+        }
         //txt_log?.scrollTo(0, txt_log.bottom)
 
     }
@@ -135,12 +154,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         displayActivityLog("OnRestart")
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         displayActivityLog("OnSaveInstanceState")
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         displayActivityLog("OnRestoreInstanceState")
     }
@@ -169,8 +188,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onBackPressed() {
         super.onBackPressed()
         txt_log.postDelayed({
-            android.os.Process.killProcess(Process.myPid())
-            System.exit(1)
+            Process.killProcess(Process.myPid())
+            exitProcess(1)
         }, 200)
 
     }
