@@ -57,7 +57,7 @@ class BlankFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState!!)
+        super.onActivityCreated(savedInstanceState)
         holdingActivity.displayFragmentLog("$count OnActivityCreated")
     }
 
