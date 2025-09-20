@@ -1,27 +1,29 @@
 package com.jk.flcd.ui.fragments
 
-
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.jk.flcd.R
+import com.jk.flcd.databinding.FragmentBlankBinding
 import com.jk.flcd.ui.main.MainActivity
 import com.jk.flcd.utils.ViewUtils
-import kotlinx.android.synthetic.main.fragment_blank.*
 
-
-class BlankFragment : androidx.fragment.app.Fragment() {
+class BlankFragment : Fragment() {
 
     private lateinit var holdingActivity: MainActivity
     val count: Int by lazy { requireArguments().getInt("count") }
+
+    private var _binding: FragmentBlankBinding? = null
+    // This property is only valid between onCreateView and onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         holdingActivity = activity as MainActivity
         holdingActivity.displayFragmentLog("$count OnAttach")
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,30 +31,24 @@ class BlankFragment : androidx.fragment.app.Fragment() {
         holdingActivity.displayFragmentLog("$count OnCreate")
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         holdingActivity.displayFragmentLog("$count OnCreateView")
-        return inflater.inflate(
-            R.layout.fragment_blank,
-            container,
-            false
-        )
+        _binding = FragmentBlankBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         holdingActivity.displayFragmentLog("$count OnViewCreated")
         val id = arguments?.getInt("ID")
-        fragment?.setBackgroundColor(id!!)
+          id?.let { binding.fragment.setBackgroundColor(it) }
 
-
-        blank_text.apply {
-
+        binding.blankText.apply {
             setTextColor(ViewUtils.getLabelTextColor(holdingActivity, id!!))
-            text = String.format(resources.getString(R.string.count), count)
+            text = String.format(resources.getString(R.string.count), this@BlankFragment.count) // use this@BlankFragment.count for clarity
         }
     }
 
@@ -99,6 +95,7 @@ class BlankFragment : androidx.fragment.app.Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         holdingActivity.displayFragmentLog("$count OnDestroyView")
+        _binding = null // Clear the binding reference
     }
 
     override fun onDestroy() {
@@ -110,6 +107,4 @@ class BlankFragment : androidx.fragment.app.Fragment() {
         super.onDetach()
         holdingActivity.displayFragmentLog("$count OnDetach")
     }
-
-
 }
