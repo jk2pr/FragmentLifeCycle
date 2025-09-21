@@ -7,8 +7,10 @@ import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.jk.flcd.R
+import com.jk.flcd.databinding.ActivityMainBinding
 import com.jk.flcd.ui.fragments.BlankFragment
 import com.jk.flcd.utils.Constant.TAG0
 import com.jk.flcd.utils.Constant.TAG1
@@ -16,11 +18,11 @@ import com.jk.flcd.utils.Constant.count
 import com.jk.flcd.utils.Constant.log
 import com.jk.flcd.utils.Constant.map
 import com.jk.flcd.utils.Constant.rnd
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var binding: ActivityMainBinding
 
     override fun onClick(v: View) {
         val bundle = Bundle()
@@ -37,7 +39,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 commitId =
                     supportFragmentManager.beginTransaction().add(R.id.content, fragment, tag)
                         .commit()
-
             }
             R.id.remove_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
@@ -48,10 +49,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     fragmentToRemove?.let {
                         commitId =
                             supportFragmentManager.beginTransaction().remove(fragmentToRemove)
-                                //.addToBackStack(fragmentToRemove.toString())
                                 .commit()
                         map.remove(ide)
-
                     }
                     if (map.isEmpty())
                         count = 0
@@ -68,10 +67,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 fragment.arguments = bundle
                 commitId =
                     supportFragmentManager.beginTransaction().replace(R.id.content, fragment, tag)
-                        //.addToBackStack(fragment.toString())
                         .commit()
-
-
             }
             R.id.hide_frag -> {
                 if (supportFragmentManager.fragments.isNotEmpty()) {
@@ -81,21 +77,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     fragmentToHide?.let {
                         commitId = if (fragmentToHide.isHidden)
                             supportFragmentManager.beginTransaction().show(fragmentToHide)
-                                //addToBackStack(fragmentToHide.toString())
                                 .commit()
                         else
                             supportFragmentManager.beginTransaction().hide(fragmentToHide)
-                                //.addToBackStack(fragmentToHide.toString())
                                 .commit()
-
                     }
                 }
             }
             R.id.clear -> {
-                txt_log.text = ""
+                binding.txtLog.text = ""
                 log.delete(0, log.length)
             }
-
         }
         Log.d(javaClass.simpleName, (v as Button).text.toString())
         Log.d(javaClass.simpleName + "commitId= ", commitId.toString())
@@ -109,39 +101,45 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 (it as BlankFragment).count.toString()
             )
         }
-
     }
 
     private fun displayActivityLog(text: String) {
         log.append("\n").append(TAG0).append(text)
-        txt_log?.text = log.trim()
-        scrollView?.post {
-            scrollView.fullScroll(View.FOCUS_DOWN)
+        binding.txtLog.text = log.trim()
+        binding.scrollView.post {
+            binding.scrollView.fullScroll(View.FOCUS_DOWN)
         }
-
     }
 
     fun displayFragmentLog(text: String) {
         log.append("\n").append(TAG1).append(text)
-        txt_log?.text = log.trim()
-        scrollView?.post {
-            scrollView.fullScroll(View.FOCUS_DOWN)
+        binding.txtLog.text = log.trim()
+        binding.scrollView.post {
+            binding.scrollView.fullScroll(View.FOCUS_DOWN)
         }
-        //txt_log?.scrollTo(0, txt_log.bottom)
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        txt_log.movementMethod = ScrollingMovementMethod()
-        displayActivityLog("OnCreate")
-        add_frag.setOnClickListener(this)
-        remove_frag.setOnClickListener(this)
-        replace_frag.setOnClickListener(this)
-        hide_frag.setOnClickListener(this)
-        clear.setOnClickListener(this)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        binding.txtLog.movementMethod = ScrollingMovementMethod()
+        displayActivityLog("OnCreate")
+        binding.addFrag.setOnClickListener(this)
+        binding.removeFrag.setOnClickListener(this)
+        binding.replaceFrag.setOnClickListener(this)
+        binding.hideFrag.setOnClickListener(this)
+        binding.clear.setOnClickListener(this)
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                binding.txtLog.postDelayed({
+                    Process.killProcess(Process.myPid())
+                    exitProcess(1)
+                }, 200)
+            }
+        })
     }
 
     override fun onStart() {
@@ -164,7 +162,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         displayActivityLog("OnRestoreInstanceState")
     }
 
-
     override fun onResume() {
         super.onResume()
         displayActivityLog("OnResume")
@@ -184,15 +181,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onDestroy()
         displayActivityLog("OnDestroy")
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        txt_log.postDelayed({
-            Process.killProcess(Process.myPid())
-            exitProcess(1)
-        }, 200)
-
-    }
-
-
 }
