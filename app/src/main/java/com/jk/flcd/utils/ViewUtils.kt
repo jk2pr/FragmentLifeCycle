@@ -3,7 +3,6 @@ package com.jk.flcd.utils
 import android.content.Context
 import android.graphics.Color
 import androidx.core.content.ContextCompat
-import com.jk.flcd.R
 
 object ViewUtils {
     fun getLabelTextColor(context: Context, bgColorValue: Int): Int {

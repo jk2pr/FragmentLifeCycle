@@ -17,6 +17,7 @@ class BlankFragment : Fragment() {
     val count: Int by lazy { requireArguments().getInt("count") }
 
     private var _binding: FragmentBlankBinding? = null
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
@@ -44,7 +45,7 @@ class BlankFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         holdingActivity.displayFragmentLog("$count OnViewCreated")
         val id = arguments?.getInt("ID")
-          id?.let { binding.fragment.setBackgroundColor(it) }
+        id?.let { binding.fragment.setBackgroundColor(it) }
 
         binding.blankText.apply {
             setTextColor(ViewUtils.getLabelTextColor(holdingActivity, id!!))

@@ -1,6 +1,6 @@
 package com.jk.flcd.utils
 
-import java.util.*
+import java.util.Random
 
 object Constant {
     val rnd = Random()
@@ -10,6 +10,3 @@ object Constant {
     const val TAG0: String = "Activity : "
     const val TAG1: String = "Fragment : "
 }
-//Test 00
-// Changes After Stashing
-// Stashed
